@@ -1,5 +1,9 @@
 package it.stacja.springworkshop;
 
+import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
+
 public class DefaultTweetService implements TweetService {
 
 	private TweetRepository tweetRepository;
@@ -12,7 +16,7 @@ public class DefaultTweetService implements TweetService {
 	}
 
 	@Override
-	public Iterable<Tweet> allTweets() {
+	public Collection<Tweet> allTweets() {
 		return tweetRepository.findAll();
 	}
 
@@ -26,5 +30,10 @@ public class DefaultTweetService implements TweetService {
 		if (safetyStrategy.isSafe(tweet)) {
 			tweetRepository.save(tweet);
 		}
+	}
+
+	@Override
+	public Optional<Tweet> findById(UUID id) {
+		return tweetRepository.findById(id);
 	}
 }

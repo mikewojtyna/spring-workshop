@@ -46,7 +46,8 @@ public class TweetApiWebTest {
 
 			// then
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$", hasSize(3)));
+			.andExpect(jsonPath("$._embedded.tweetList",
+				hasSize(3)));
 		verify(tweetService).allTweets();
 	}
 
