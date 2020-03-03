@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/tweets")
 public class TweetController {
 
-	private TweetRepository tweetRepository;
+	private TweetService tweetService;
 
-	public TweetController(TweetRepository tweetRepository) {
-		this.tweetRepository = tweetRepository;
+	public TweetController(TweetService tweetService) {
+		this.tweetService = tweetService;
 	}
 
 	@GetMapping
 	public Iterable<Tweet> allTweets() {
-		return tweetRepository.findAll();
+		return tweetService.allTweets();
 	}
 
 	@GetMapping(params = "title")
 	public Iterable<Tweet> findTweetByTitle(@RequestParam("title") String title) {
-		return tweetRepository.findByTitle(title);
+		return tweetService.findByTitle(title);
 	}
 
 	@PostMapping
 	public void create(@RequestBody Tweet tweet) {
-		tweetRepository.save(tweet);
+		tweetService.create(tweet);
 	}
 }
